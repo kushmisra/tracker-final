@@ -38,6 +38,9 @@ class UserLoginController < ApiController
 	def create
 		name = params[:name]
 		password = params[:password]
+		email = params[:email]
+		mob = params[:mob]
+		make = params[:make]
 		user = User.where(:name => name, :password=> password).first
 		if user
 			return response_data({},"user already there","403")
@@ -46,13 +49,15 @@ class UserLoginController < ApiController
 			user.name = name
 			user.password = password
 			user.secret = SecureRandom.hex
+			user.mob = mob
+			user.email = email
+			user.make = make
 			user.save
 			data = Hash.new
 			data["USER_NAME"] = user.name
 			data["USER_PASSWORD"] = user.password
 			data["USER_SECRET"] = user.secret
 			return response_data(data, "user created", "200")
-
 		end
 	end
 

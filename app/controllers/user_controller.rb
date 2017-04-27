@@ -84,6 +84,7 @@ class UserController < ApiController
 		if user 
 			data = Hash.new
 			data["secret"] = user.secret
+			data["mob"] = user.mob
 			return response_data(data, "user found", "200")
 		else
 			return response_data({},"no user","404")
