@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  
+
   post '/check' => 'user_login#check'
   post '/checklogin' => 'user_login#checklogin'
   post '/create' => 'user_login#create'
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
