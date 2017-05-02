@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426213235) do
+ActiveRecord::Schema.define(version: 20170428194017) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "latitude"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170426213235) do
     t.datetime "updated_at", null: false
     t.string   "battery"
     t.string   "make"
+    t.string   "lock"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20170426213235) do
     t.string   "mob"
     t.string   "email"
     t.string   "make"
+    t.string   "lock"
   end
 
 end

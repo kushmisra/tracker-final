@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/update' => 'user#update'
   post '/getlocation' => 'user#getlocation'
   post '/music' => 'user#music'
+  post '/lock' => 'user#lock'
   post '/battery' => 'user#battery'
   post '/getsecret' => 'user#getsecret'
 

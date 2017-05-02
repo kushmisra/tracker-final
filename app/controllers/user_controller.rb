@@ -1,5 +1,6 @@
 class UserController < ApiController
 
+	
 	def battery
 		secret = params[:secret]
 		user = User.where(:secret => secret).first
@@ -13,14 +14,17 @@ class UserController < ApiController
 		end
 	end
 
+
 	def music
 		secret = params[:secret]
 		user = User.where(:secret => secret).first
 		if user
 			if user.music == "false"
 				user.music = "true"
-			else
+			elsif user.music == "true"
 				user.music = "false"
+			else
+				user.music = "true"
 			end
 			user.save!
 			data = Hash.new
@@ -32,6 +36,17 @@ class UserController < ApiController
 
 	end
 
+	def lock
+		secret = params[:secret]
+		user = User.where(:secret => secret).first
+		if user
+			user.lock = "true"
+			user.save!
+			return response_data({},"locked","200")
+		end
+			return response_data({},"user not found","404")
+	end
+
 
 	def update
 		secret = params[:secret]
@@ -40,10 +55,22 @@ class UserController < ApiController
 		battery = params[:battery]
 		user = User.where(:secret => secret).first
 		if user
+
+			if user.locations.size == 3
+				user.locations.first.destroy
+				user.save!
+			end
 			user.locations.create(:latitude => latitude,
 				:longitude => longitude ,:battery => battery)
 			data = Hash.new
 			data["music"] = user.music
+			if user.lock == "true"
+				data["lock"] = "true"
+				user.lock = "false"
+				user.save!
+			else
+				data["lock"] = "false"
+			end
 			return response_data(data,"updated","200")
 		else
 			return response_data({},"user not found","404")
